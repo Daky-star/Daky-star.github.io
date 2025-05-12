@@ -236,7 +236,7 @@
         </div>
         <nav class="navbar">
             <ul>
-                <li><a href="Index.html"> Inicio </a></li>
+                <li><a href="index.html"> Inicio </a></li>
                 <li><a href="Períodos.php"> Períodos </a></li>
                 <li><a href="Exposiciones.php" class="active">Exposiciones</a></li>
                 <li><a href="Localizaciones.php">Localizaciones</a></li>
