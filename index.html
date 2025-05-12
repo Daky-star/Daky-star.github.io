@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Inicio</title>
+    <style>
+        body {
+            margin: 0;
+        }
+        header {
+            padding: 5px 0;
+            text-align: center;
+            box-shadow: none;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background-color: #ffffff;
+            border-bottom: 5px solid #d7a75a;
+        }
+
+        .logo-container {
+            margin-left: 30px;
+        }
+
+        .logo-img {
+            height: auto;
+            width: 60%;
+            object-fit: contain;
+        }
+
+        .navbar {
+            display: flex;
+            align-items: center;
+            background-color: transparent;
+        }
+
+        .navbar ul {
+            list-style-type: none;
+            display: flex;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar li {
+            margin: 0 15px;
+        }
+
+        .navbar a {
+            color: #d7a75a;
+            text-decoration: none;
+            font-size: 1.2em;
+            text-transform: uppercase;
+        }
+
+        .navbar a:hover {
+            color: #000000;
+        }
+        .navbar a.active {
+            font-weight: bold;
+            color: #000000;
+            border-bottom: 2px solid #d7a75a;
+        }
+        .scroll-container {
+            display: flex;
+            overflow-x: auto;
+            gap: 10px;
+            padding: 10px 0;
+            scrollbar-width: thin;
+            scrollbar-color: #d7a75a #f1f1f1;
+        }
+        .scroll-container::-webkit-scrollbar {
+            height: 8px;
+        }
+        .scroll-container::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 4px;
+        }
+        .scroll-container::-webkit-scrollbar-thumb {
+            background-color: #d7a75a;
+            border-radius: 4px;
+        }
+        .scroll-image {
+            height: 100px;
+            border-radius: 8px;
+            object-fit: cover;
+            flex-shrink: 0;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        .scroll-image:hover {
+            transform: scale(1.1);
+        }
+        .rotating-image {
+            width: 100%;
+            max-height: 150px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-top: 15px;
+            transition: opacity 0.5s ease-in-out;
+        }
+        .banner {
+        display: grid;
+        grid-template-columns: auto 1fr auto auto auto;
+        align-items: center;
+        padding: 10px 30px;
+        gap: 20px;
+        background-color: white;
+        font-family: 'Arial', sans-serif;
+        }
+
+        .banner img.logo-museosrd {
+        height: 60px;
+        }
+
+        .banner .text-container {
+        font-size: 20px;
+        line-height: 1.2;
+        }
+
+        .banner .text-container strong {
+        color: #001c78;
+        }
+
+        .banner .republica img {
+        height: 50px;
+        }
+
+        .banner .direccion {
+        text-align: right;
+        font-size: 14px;
+        }
+
+        .banner .redes {
+        display: flex;
+        gap: 10px;
+        }
+
+        .banner .redes img {
+        height: 22px;
+        }
+
+        @media (max-width: 768px) {
+        .banner {
+            grid-template-columns: 1fr;
+            text-align: center;
+            gap: 15px;
+        }
+        .banner .text-container,
+        .banner .direccion,
+        .banner .republica,
+        .banner .redes {
+            justify-content: center;
+        }
+        }
+        #moving-background {
+            position: relative;
+            overflow: hidden;
+        }
+        #moving-background .background-animation {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 300%;
+            height: 100%;
+            background: linear-gradient(270deg, #d7a75a, #001c78, #d7a75a, #001c78, #d7a75a);
+            background-size: 600% 600%;
+            animation: gradientMove 8s linear infinite;
+            z-index: 1;
+            border-radius: 15px;
+            filter: brightness(1.2);
+            opacity: 0.85;
+        }
+        @keyframes gradientMove {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+                           }
+        }
+        h3 {
+            font-size: 2em;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        p {
+            font-size: 1.2em;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        .card-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-top: 15px;
+        }
+        .card {
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            padding: 15px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+        }
+        .card img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+        .card h4 {
+            margin: 0 0 8px 0;
+            font-size: 1.5em;
+            color: #001c78;
+        }
+        .card p {
+            font-size: 1em;
+            color: #555;
+            margin: 0;
+        }
+        footer.dinopedia-footer {
+            background-color: #000000;
+            color: #d7a75a;
+            text-align: center;
+            padding: 20px 10px;
+            font-family: 'Arial', sans-serif;
+            font-size: 0.9em;
+            border-top: 5px solid #d7a75a;
+        }
+        footer.dinopedia-footer p {
+            margin: 5px 0;
+        }
+        footer.dinopedia-footer a {
+            color: #d7a75a;
+            text-decoration: none;
+        }
+        footer.dinopedia-footer a:hover {
+            text-decoration: underline;
+        }
+        @media (max-width: 600px) {
+            footer.dinopedia-footer {
+                font-size: 0.8em;
+                padding: 15px 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <script>
+        const exhibicionesImages = [
+            "Exhibicion.jpeg",
+            "Exhibicion2.jpeg",
+            "Exhibicion3.jpeg"
+        ];
+        const actividadesImages = [
+            "Actividad.jpg",
+            "Actividad2.jpg",
+            "Actividad3.jpg"
+        ];
+        const investigacionImages = [
+            "Investigacion.jpg",
+            "Investigacion2.jpg",
+            "Investigacion3.jpeg"
+        ];
+    
+        function rotateImages(imageId, images, interval = 5000) {
+            let index = 0;
+            const imgElement = document.getElementById(imageId);
+    
+            imgElement.src = images[index];
+    
+            setInterval(() => {
+                index = (index + 1) % images.length;
+                imgElement.style.opacity = 0;
+                setTimeout(() => {
+                    imgElement.src = images[index];
+                    imgElement.style.opacity = 1;
+                }, 500);
+            }, interval);
+        }
+    
+        window.onload = () => {
+            rotateImages("exhibiciones-img", exhibicionesImages);
+            rotateImages("actividades-img", actividadesImages);
+            rotateImages("investigacion-img", investigacionImages);
+        };
+    </script>
+    <div class="banner">
+        <img class="logo-museosrd" src="logo-museosrd.png" alt="MuseosRD">
+
+        <div class="text-container">
+          <span>Portal de la <br><strong>Red Nacional de Museos <br>de la República Dominicana</strong></span>
+        </div>
+      
+        <div class="republica">
+          <img src="Escudo-Republica-Dominicana.png" alt="Escudo RD">
+        </div>
+      
+        <div class="redes">
+          <a href="#"><img src="instagram.png" alt="Instagram"></a>
+          <a href="#"><img src="facebook.png" alt="Facebook"></a>
+          <a href="#"><img src="X.avif" alt="Twitter"></a>
+        </div>  
+      </div>
+      <hr>
+    <header>
+        <div class="logo-container">
+            <img src="logo,dinopedia.png" alt="Dinopedia Logo" class="logo-img">
+        </div>
+        <nav class="navbar">
+            <ul>
+                <li><a href="Index.html" class="active"> Inicio </a></li>
+                <li><a href="Períodos.php"> Períodos </a></li>
+                <li><a href="Exposiciones.php">Exposiciones</a></li>
+                <li><a href="Localizaciones.php">Localizaciones</a></li>
+                <li><a href="Sobre_Nosotros.php">Sobre Nosotros</a></li>
+                <li><a href="Contactanos.php">Contactanos</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main style="width: 90%; margin: 40px auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 0 20px rgba(0,0,0,0.1); color: #333; line-height: 1.6;">
+        <div id="moving-background" style="text-align: center; margin-bottom: 40px; background: linear-gradient(135deg, #d7a75a, #001c78); padding: 30px 20px; border-radius: 15px; color: white; box-shadow: 0 8px 20px rgba(0,0,0,0.15); font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; overflow: hidden; position: relative;">
+            <h2 style="font-size: 2.8em; font-weight: 700; margin-bottom: 10px; text-shadow: 2px 2px 4px rgba(0,0,0,0.4); letter-spacing: 2px; position: relative; z-index: 2;">Descubre a DinoPedia!</h2>
+            <p style="font-size: 1.4em; font-weight: 500; max-width: 600px; margin: 0 auto; text-shadow: 1px 1px 3px rgba(0,0,0,0.3); position: relative; z-index: 2;">
+                DinoPedia se creó con el propósito de ofrecer una fuente confiable, educativa y entretenida sobre los dinosaurios, dirigida tanto a niños como a adultos interesados en la paleontología.
+            </p>
+            <div class="background-animation"></div>
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr; gap: 40px;">
+            <div style="background: white; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+                <h3><a href="#" style="color: inherit; text-decoration: none;">Períodos</a></h3>
+                <p>Aprende más sobre los diferentes períodos de los dinosaurios!</p>
+                <div class="card-container">
+                    <div class="card">
+                        <img src="Cámbrico.jpg" alt="Cámbrico">
+                        <h4>Cámbrico</h4>
+                        <p>Comenzó hace unos 541 millones de años y marcó un gran aumento en la diversidad de la vida marina. Durante este período surgieron muchos animales con exoesqueletos, como los trilobites, en un evento conocido como la “explosión cámbrica”.</p>
+                    </div>
+                    <div class="card">
+                        <img src="Ordovicico.jpg" alt="Ordovícico">
+                        <h4>Ordovícico</h4>
+                        <p>Entre hace 485 y 444 millones de años, se caracterizó por la expansión de la vida en los océanos. Aparecieron los primeros peces sin mandíbulas y se desarrollaron los corales primitivos. Finalizó con una gran extinción causada por un enfriamiento global.</p>
+                    </div>
+                    <div class="card">
+                        <img src="Silurico.jpg" alt="Sílurico">
+                        <h4>Sílurico</h4>
+                        <p>Que ocurrió entre hace 444 y 419 millones de años, fue un período de estabilidad y recuperación. Surgieron las primeras plantas vasculares en tierra firme y los peces comenzaron a desarrollar mandíbulas.</p>
+                    </div>
+                    <div class="card">
+                        <img src="Devónico.jpg" alt="Devónico">
+                        <h4>Devónico</h4>
+                        <p>De hace 419 a 359 millones de años, es conocido como la “Edad de los peces” por su gran variedad. También aparecieron los primeros anfibios y los primeros bosques, marcando importantes avances en la vida terrestre.</p>
+                    </div>
+                </div>
+                <p style="font-size: 0.9em; color: #777; margin-top: 15px; text-align: center;">Puedes ir a la página <a href="Períodos.php" style="color: #d7a75a; text-decoration: none;">Períodos</a> para más información.</p>
+            </div>
+            <div style="background: white; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+                <h3><a href="#" style="color: inherit; text-decoration: none;">Exposiciones</a></h3>
+                <p>Descubre y mira de cerca algunos de los dinosaurios más antiguos del mundo! </p>
+                <div class="card-container">
+                    <div class="card">
+                        <img src="Rex.jpg" alt="Rex">
+                        <h4>Rex</h4>
+                        <p>Uno de los dinosaurios carnívoros más famosos, vivió hacia el final del Cretácico.</p>
+                    </div>
+                    <div class="card">
+                        <img src="Gastornis.jpg" alt="Gastornis">
+                        <h4>Gastornis</h4>
+                        <p>Aunque no era un dinosaurio tradicional, este ave gigante desciende de ellos y dominó tras la extinción de los dinosaurios.</p>
+                    </div>
+                    <div class="card">
+                        <img src="Phorus.jpg" alt="Phorusrhacos">
+                        <h4>Phorusrhacos</h4>
+                        <p>También conocido como “ave del terror”, era un ave carnívora gigante, descendiente de dinosaurios, que vivió en Sudamérica.</p>
+                    </div>
+                    <div class="card">
+                        <img src="Struthio.png" alt="Struthio camelus">
+                        <h4>Struthio camelus</h4>
+                        <p>Aunque no es un dinosaurio en el sentido clásico, es un descendiente directo de los dinosaurios terópodos.</p>
+                    </div>
+                </div>
+                <p style="font-size: 0.9em; color: #777; margin-top: 15px; text-align: center;">Puedes ir a la página <a href="#" style="color: #d7a75a; text-decoration: none;">Exposiciones</a> para más información.</p>
+            </div>
+            <div style="background: white; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+                <h3><a href="#" style="color: inherit; text-decoration: none;">Localizaciones</a></h3>
+                <p>Mira nuestros diferentes museos alrededor del país!</p>
+                <div class="card-container">
+                    <div class="card">
+                        <img src="Museo1.jpeg" alt="San Carlos">
+                        <h4>San Carlos</h4>
+                        <p>C/ Maria Nicolasa Billini #12</p>
+                    </div>
+                    <div class="card">
+                        <img src="Museo2.jpg" alt="Los Alcarrizos">
+                        <h4>Los Alcarrizos</h4>
+                        <p>Av. Hermanas Mirabal #45</p>
+                    </div>
+                    <div class="card">
+                        <img src="Museo3.jpg" alt="Santiago">
+                        <h4>Santiago</h4>
+                        <p>Calle del Sol #78</p>
+                    </div>
+                    <div class="card">
+                        <img src="Museo4.jpg" alt="La Vega">
+                        <h4>La Vega</h4>
+                        <p>Av. Juan Pablo Duarte #33</p>
+                    </div>
+                </div>
+                <p style="font-size: 0.9em; color: #777; margin-top: 15px; text-align: center;">Puedes ir a la página <a href="Localizaciones.php" style="color: #d7a75a; text-decoration: none;">Localizaciones</a> para más información.</p>
+            </div>
+        </div>
+    </main>
+    <footer class="dinopedia-footer">
+        <p>© 2024 Dinopedia - Todos los derechos reservados</p>
+        <p>Contacto: <a href="mailto:infoypreguntas0120@dinopedia.com">infoypreguntas0120@dinopedia.com</a> | Tel: (829) 637-4696</p>
+        <p>Creado por David y Erick</p>
+    </footer>
+</body>
+</html>
