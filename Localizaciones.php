@@ -298,7 +298,7 @@
         </div>
         <nav class="navbar">
             <ul>
-                <li><a href="Index.php"> Inicio </a></li>
+                <li><a href="index.php"> Inicio </a></li>
                 <li><a href="Períodos.php"> Períodos </a></li>
                 <li><a href="Exposiciones.php">Exposiciones</a></li>
                 <li><a href="Localizaciones.php" class="active">Localizaciones</a></li>
